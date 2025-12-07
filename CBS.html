@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROYAL CABS</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: TIMES NEW ROMAN, sans-serif; }
+        body { background: #f2f2f2; }
+        header {
+            background: #387fc2;
+            color: dark (115, 80, 143);
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 { font-size: 2em; margin-bottom: 5px; }
+        header p { font-size: 1.1em; font-style: italic; }
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #778694;
+            padding: 10px;
+        }
+        nav button {
+            background: #6c757d;
+            color: rgb(83, 52, 52);
+            border: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        nav button:hover { background: #f0b506; color: black; }
+        .module {
+            display: none;
+            width: 850px;
+            max-width: 95%;
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 15px;
+            color: rgb(68, 22, 22);
+            text-align: center;
+            box-shadow: 0 0 25px rgba(0,0,0,0.4);
+        }
+        h2 { margin-bottom: 20px; }
+        input, select, textarea, button { margin: 10px 0; padding: 12px; width: 80%; border-radius: 8px; border: none; font-size: 1em; }
+        button { cursor: pointer; background: #f16406; color: rgb(248, 1, 1); font-weight: bold; }
+        .green { background: #65c07a; }
+        .blue { background: #4f5d6d; }
+        .purple { background: #8059a5; }
+        .orange { background: #a56a3a; }
+        .red { background: #ac5e65; }
+        .cyan { background: #558c94; }
+        .pink { background: #b64d7e; }
+        .teal { background: #66caac; }
+        #map { height: 400px; width: 100%; margin: 15px 0; border-radius: 10px; }
+        img.vehicle-img { width: 150px; margin: 10px; border-radius: 15px; box-shadow: 0 0 15px rgba(0,0,0,0.3); }
+        p { margin: 10px 0; font-size: 1.1em; }
+        .thank-you { font-size: 1.5em; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>WELCOME TO ROYAL CABS</h1>
+    <p>"Ride with comfort, safety, and style!"</p>
+    <div>
+        <img src="https://cdn-icons-png.flaticon.com/512/743/743131.png" alt="Car" class="vehicle-img">
+        <img src="https://cdn-icons-png.flaticon.com/512/743/743135.png" alt="Bike" class="vehicle-img">
+        <img src="https://cdn-icons-png.flaticon.com/512/743/743146.png" alt="Auto" class="vehicle-img">
+    </div>
+</header>
+
+<nav>
+    <button onclick="showModule(0)">Registration</button>
+    <button onclick="showModule(1)">Login</button>
+    <button onclick="showModule(2)">Driver</button>
+    <button onclick="showModule(3)">Vehicle</button>
+    <button onclick="showModule(4)">Ride</button>
+    <button onclick="showModule(5)">GPS</button>
+    <button onclick="showModule(6)">Payment</button>
+    <button onclick="showModule(7)">Feedback</button>
+    <button onclick="showModule(8)">Thank You</button>
+</nav>
+
+<!-- 0. Registration Module -->
+<div id="registration" class="module green">
+    <h2>User Registration</h2>
+    <input type="text" id="username" placeholder="Full Name" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="text" id="mobile" placeholder="Mobile Number" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button onclick="registerUser()">Register</button>
+    <p id="regMessage"></p>
+</div>
+
+<!-- 1. Login Module -->
+<div id="login" class="module teal">
+    <h2>User Login</h2>
+    <input type="email" id="loginEmail" placeholder="Email">
+    <input type="password" id="loginPassword" placeholder="Password">
+    <button onclick="loginUser()">Login</button>
+    <p id="loginMessage"></p>
+</div>
+
+<!-- 2. Driver Module -->
+<div id="driver" class="module blue">
+    <h2>Driver Module</h2>
+    <input type="text" id="driverName" placeholder="Driver Name">
+    <input type="text" id="driverEmail" placeholder="Driving Email">
+    <input type="text" id="driverPassword" placeholder="Vehicle Password">
+    <input type="text" id="driverMobile" placeholder="Mobile Number">
+    <select id="driverStatus">
+        <option value="online">Online</option>
+        <option value="offline">Offline</option>
+    </select>
+    <button onclick="saveDriver()">Save Driver Info</button>
+    <p id="driverMessage"></p>
+</div>
+
+<!-- 3. Vehicle Module -->
+<div id="vehicle" class="module purple">
+    <h2>Vehicle Management</h2>
+    <input type="text" id="vehicleModel" placeholder="Vehicle Model">
+    <input type="text" id="vehicleNumber" placeholder="Vehicle Number">
+    <select id="vehicleType">
+        <option value="Mini">Mini</option>
+        <option value="Sedan">Sedan</option>
+        <option value="SUV">SUV</option>
+        <option value="Luxury">Luxury</option>
+        <option value="Auto">Auto</option>
+        <option value="Bike">Bike</option>
+
+    </select>
+    <button onclick="addVehicle()">Add Vehicle</button>
+    <p id="vehicleMessage"></p>
+</div>
+
+<!-- 4. Ride Booking Module -->
+<div id="ride" class="module orange">
+    <h2>Book a Ride</h2>
+    <input type="text" id="pickup" placeholder="Pick-up Location">
+    <input type="text" id="drop" placeholder="Drop Location">
+    <select id="cabType">
+        <option value="Mini">Mini</option>
+        <option value="Sedan">Sedan</option>
+        <option value="SUV">SUV</option>
+        <option value="Luxury">Luxury</option>
+        <option value="Auto">Auto</option>
+        <option value="Bike">Bike</option>
+    </select>
+    <button onclick="bookRide()">Calculate Fare & Assign Driver</button>
+    <p id="rideMessage"></p>
+</div>
+
+<!-- 5. GPS Module -->
+<div id="gps" class="module red">
+    <h2>GPS / Navigation</h2>
+    <div id="map"></div>
+    <button onclick="shareLocation()">Share Live Location</button>
+    <p id="gpsMessage"></p>
+</div>
+
+<!-- 6. Payment Module -->
+<div id="payment" class="module cyan">
+    <h2>Payment</h2>
+    <p>Fare Amount: ₹<span id="fareAmount">0</span></p>
+    <select id="paymentMethod">
+        <option value="UPI">UPI</option>
+        <option value="Wallet">Wallet</option>
+        <option value="Card">Card</option>
+        <option value="Cash">Cash</option>
+    </select>
+    <button onclick="makePayment()">Pay Now</button>
+    <p id="paymentMessage"></p>
+</div>
+
+<!-- 7. Feedback Module -->
+<div id="feedback" class="module pink">
+    <h2>Ride Feedback</h2>
+    <textarea id="feedbackText" placeholder="Share your feedback..." rows="5"></textarea>
+    <button onclick="submitFeedback()">Submit Feedback</button>
+    <p id="feedbackMessage"></p>
+</div>
+
+<!-- 8. Thank You Page -->
+<div id="thankyou" class="module green">
+    <h2>Thank You!</h2>
+    <p class="thank-you">Your ride experience matters to us.</p>
+    <p>"Drive safe, ride happy!"</p>
+</div>
+
+<script>
+    let currentModule = 0;
+    const modules = ['registration','login','driver','vehicle','ride','gps','payment','feedback','thankyou'];
+    let fare = 0;
+    let map, marker;
+
+    function showModule(index){
+        modules.forEach(id => document.getElementById(id).style.display = 'none');
+        document.getElementById(modules[index]).style.display = 'block';
+        currentModule = index;
+    }
+
+    // Registration
+    function registerUser() {
+        const name = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
+        const mobile = document.getElementById('mobile').value;
+        const password = document.getElementById('password').value;
+        if(name && email && mobile && password){
+            document.getElementById('regMessage').innerText = 'Registration Successful!';
+            setTimeout(()=>showModule(1),1500);
+        } else { document.getElementById('regMessage').innerText = 'Fill all fields.'; }
+    }
+
+    // Login
+    function loginUser() {
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        if(email && password){
+            document.getElementById('loginMessage').innerText = 'Login Successful!';
+            setTimeout(()=>showModule(2),1500);
+        } else { document.getElementById('loginMessage').innerText = 'Fill all fields.'; }
+    }
+
+    // Driver
+    function saveDriver() {
+        document.getElementById('driverMessage').innerText = 'Driver Info Saved!';
+        setTimeout(()=>showModule(3),1500);
+    }
+
+    // Vehicle
+    function addVehicle() {
+        document.getElementById('vehicleMessage').innerText = 'Vehicle Added!';
+        setTimeout(()=>showModule(4),1500);
+    }
+
+    // Ride Booking
+    function bookRide() {
+        const cabType = document.getElementById('cabType').value;
+        const distance = Math.floor(Math.random()*13)+3;
+        let rate=0;
+        switch(cabType){case 'Mini': rate=15; break; case 'Sedan': rate=20; break; case 'SUV': rate=25; break; case 'Luxury': rate=50; break; case 'Auto': rate=10; break; case 'Bike': rate=8;}
+        fare=distance*rate;
+        document.getElementById('rideMessage').innerText=`Ride Booked! Distance: ${distance}km, Fare: ₹${fare}`;
+        setTimeout(()=>showModule(5),2000);
+    }
+
+    // GPS
+    function initMap() {
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition((pos)=>{
+                const userPos={lat:pos.coords.latitude,lng:pos.coords.longitude};
+                map=new google.maps.Map(document.getElementById('map'),{zoom:14,center:userPos});
+                marker=new google.maps.Marker({position:userPos,map:map,title:"You are here"});
+            });
+        }
+    }
+
+    function shareLocation() {
+        document.getElementById('gpsMessage').innerText='Location Shared!';
+        setTimeout(()=>showModule(6),1500);
+    }
+
+    // Payment
+    function makePayment() {
+        const method=document.getElementById('paymentMethod').value;
+        document.getElementById('fareAmount').innerText=fare;
+        document.getElementById('paymentMessage').innerText=`Payment of ₹${fare} done via ${method}!`;
+        setTimeout(()=>showModule(7),2000);
+    }
+
+    // Feedback
+    function submitFeedback() {
+        const fb=document.getElementById('feedbackText').value;
+        if(fb){
+            document.getElementById('feedbackMessage').innerText='Thank you for your feedback!';
+            setTimeout(()=>showModule(8),2000);
+        } else { document.getElementById('feedbackMessage').innerText='Please write feedback.'; }
+    }
+
+    // Show first module initially
+    showModule(0);
+    window.initMap = initMap;
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap" async defer></script>
+
+</body>
+</html>
